@@ -65,7 +65,6 @@ export const likePost=async(req,res)=>{
             {likes:post.likes},
             {new:true}
         );
-        
         res.status(200).json(updatedPost);
     }catch(err){
         res.status(404).json({message:err.message});
