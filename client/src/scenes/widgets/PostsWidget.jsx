@@ -4,8 +4,9 @@ import { setPosts } from "state";
 import PostWidget from "./PostWidget";
 
 const PostsWidget = ({ userId, isProfile = false })=>{
-  const dispatch = useSelector((state)=>state.posts);
-  const token = useSelector((state)=>state.token)
+  const dispatch = useDispatch();
+  const posts = useSelector((state)=>state.posts);
+  const token = useSelector((state)=>state.token);
 
   const getPosts = async()=>{
     const response = await fetch(`http://localhost:3001/posts`,{
@@ -17,24 +18,25 @@ const PostsWidget = ({ userId, isProfile = false })=>{
   };
 
   const getUserPosts = async()=>{
-    const response = await fetch(`http://localhost:3001/${userId}/posts`,{
+    const response = await fetch(`http://localhost:3001/posts/${userId}/posts`,{
       method: "GET",
       headers: { Authorization : `Bearer ${token}`},
     })
     const data = await response.json();
-    dispatch(setPosts({posts:data}))
+    dispatch(setPosts({posts:data}));
   };
 
-  useEffect(()=>{
-    if(isProfile)
+  useEffect(() =>{
+    if(isProfile){
       getUserPosts();
-    else{
+    }else{
       getPosts();
     }
   },[]);
+
   return (
     <>
-      {posts.map(
+      {Array.from(posts).map(
         ({
           _id,
           userId,
@@ -45,8 +47,8 @@ const PostsWidget = ({ userId, isProfile = false })=>{
           picturePath,
           userPicturePath,
           likes,
-          comments,})=>
-          (
+          comments,
+          })=>(
             <PostWidget
               key={_id}
               postId={_id}
@@ -58,14 +60,11 @@ const PostsWidget = ({ userId, isProfile = false })=>{
               userPicturePath={userPicturePath}
               likes={likes}
               comments={comments}
-            >
-
-            </PostWidget>
-
+            />
           )
-          )}
+        )}
     </>
-  )
-}
+  );
+};
 
 export default PostsWidget;
