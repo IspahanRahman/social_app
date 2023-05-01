@@ -18,7 +18,7 @@
               fontSize="32px"
               color="primary"
             >
-              Sociopedia
+              Social App
             </Typography>
         </Box>
         <Box
@@ -29,7 +29,7 @@
           backgroundColor={theme.palette.background.alt}
         >
           <Typography fontWeight="500" variant="h5" sx={{mb:"1.5rem"}}>
-            Welcome to Sociopedia, the social Media for Sociopaths!
+            Welcome to Social App, the social Media for Sociopaths!
           </Typography>
           <Form/>
         </Box>

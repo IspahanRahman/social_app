@@ -55,7 +55,7 @@ import FlexBetween from 'components/FlexBetween';
             }
           }}
           >
-            Sociopedia
+            Social App
           </Typography>
           {isNonMobileScreens && (
             <FlexBetween 
